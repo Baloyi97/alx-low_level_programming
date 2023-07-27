@@ -11,19 +11,14 @@
 
 list_t *add_node_end(list_t **head, const char *str)
 {
-	/* Check if str is NULL */
-	if (str == NULL)
-		return (NULL);
+	list_t *new;
+	list_t *tail = *head;
+	size_t len = strlen(str);
 
-	/* Calculate the length of the input string */
-	unsigned int len = strlen(str);
-
-	/* Allocate memory */
-	list_t *new = malloc(sizeof(list_t));
+	new = malloc(sizeof(list_t));
 	if (!new)
 		return (NULL);
 
-	/* Copy the input string into the new node */
 	new->str = strdup(str);
 	if (!new->str)
 	{
@@ -34,19 +29,16 @@ list_t *add_node_end(list_t **head, const char *str)
 	new->len = len;
 	new->next = NULL;
 
-	/* If empty, make the new node the head */
 	if (*head == NULL)
 	{
 		*head = new;
 		return (new);
 	}
 
-	/* Find the last node and append the new node */
-	list_t *temp = *head;
-	while (temp->next)
-		temp = temp->next;
+	while (tail->next)
+		tail = tail->next;
 
-	temp->next = new;
+	tail->next = new;
 
 	return (new);
 }
