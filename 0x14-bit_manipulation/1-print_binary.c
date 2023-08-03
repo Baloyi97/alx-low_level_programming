@@ -2,14 +2,14 @@
 #include <stdio.h>
 
 /**
- * print_binary - print binary representation of a number
- * @n: Decimal number to print as binary
+ * print_binary - Print bin representation of a number
+ * @n: Decimal number to print as bin
  */
 
 void print_binary(unsigned long int n)
 {
-	int bit_position = sizeof(n) * 8 - 1;
-	int found_one = 0;
+	unsigned long int temp;
+	int leading_zero;
 
 	if (n == 0)
 	{
@@ -17,23 +17,14 @@ void print_binary(unsigned long int n)
 		return;
 	}
 
-	while (bit_position >= 0)
+	for (temp = n, leading_zero = 0; (temp >>= 1) > 0; leading_zero++)
+		;
+
+	for (; leading_zero >= 0; leading_zero--)
 	{
-		unsigned long int bit_mask = 1UL << bit_position;
-
-		if (n & bit_mask)
-		{
-			putchar('1');
-			found_one = 1;
-		}
-		else if (found_one)
-		{
-			putchar('0');
-		}
-
-		bit_position--;
+		if ((n >> leading_zero) & 1)
+			printf("1");
+		else
+			printf("0");
 	}
-
-	putchar('\n');
 }
-
