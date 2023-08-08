@@ -1,8 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
+
 
 #define BUFFER_SIZE 1024
 #define FILE_PERMISSIONS 0664
@@ -68,6 +67,7 @@ if (argc != 3)
 buffer = create_buffer(argv[2]);
 
 from = open(argv[1], O_RDONLY);
+
 if (from == -1)
 {
 	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
